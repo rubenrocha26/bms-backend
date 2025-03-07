@@ -1,0 +1,46 @@
+@startuml
+actor user
+autonumber
+
+title: CreateBird_SequenceDiagram
+
+user -> UI ++ #application : I want to create a bird
+UI --> user -- : bird scientificName, mutation, birdRing, dateOfBirth?
+user -> UI ++ #application : birdDto(scientificName, mutation, birdRing, dateOfBirth)
+UI -> ":CreateBirdController" as CreateBirdController ++ #application : createBird(birdDto)
+
+CreateBirdController -> ":BirdServiceImpl" as BirdServiceImpl ++ #application : createBird(birdDto)
+BirdServiceImpl -> ":BirdMapper" as BirdMapper ++ #application : mapToBird(birdDto)
+
+BirdMapper -> BirdMapper : getId
+BirdMapper -> BirdMapper : getScientificName
+BirdMapper -> BirdMapper : getMutation
+BirdMapper -> BirdMapper : getBirdRing
+BirdMapper -> BirdMapper : getDateOfBirth
+BirdMapper -> ":BirdFactory" as BirdFactory ++ #application : createBird(id, scientificName, mutation, birdRing, dateOfBirth)
+
+create "bird1:Bird" as Bird
+BirdFactory -> Bird ++ #application : <create> (id, scientificName, mutation, birdRing, dateOfBirth)
+Bird --> BirdFactory -- : bird1
+BirdFactory --> BirdMapper -- : bird1
+BirdMapper --> BirdServiceImpl -- : bird1
+BirdServiceImpl -> ":BirdRepository" as BirdRepository ++ #application : saveBird(bird1)
+BirdRepository -> BirdRepository : save(bird1)
+BirdRepository --> BirdServiceImpl  -- : savedBird
+
+BirdServiceImpl -> BirdMapper ++ #application : mapToBirdDto(savedBird)
+BirdMapper -> BirdMapper : getId
+BirdMapper -> BirdMapper : getScientificName
+BirdMapper -> BirdMapper : getMutation
+BirdMapper -> BirdMapper : getBirdRing
+BirdMapper -> BirdMapper : getDateOfBirth
+BirdMapper -> "BirdDtoFactory" as BirdDtoFactory ++ #application : createBirdDto(id, scientificName, mutation, birdRing, dateOfBirth)
+
+create "birdDto1:BirdDto" as BirdDto
+BirdDtoFactory -> BirdDto ++ #application : <create> (id, scientificName, mutation, birdRing, dateOfBirth)
+BirdDto --> BirdDtoFactory -- : birdDto1
+BirdDtoFactory --> BirdMapper -- : birdDto1
+BirdMapper --> BirdServiceImpl -- :birdDto1
+BirdServiceImpl --> CreateBirdController -- : birdDto1
+CreateBirdController --> UI -- : birdDto1
+@enduml
