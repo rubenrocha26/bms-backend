@@ -1,0 +1,25 @@
+@startuml
+actor user
+autonumber
+
+title: DeleteBird_SequenceDiagram
+
+user -> UI ++ #application : I want to delete a bird
+UI --> user -- : birdId?
+user -> UI ++ #application : birdId
+UI -> ":BirdController" as BirdController ++ #application : deleteBird(birdId)
+
+BirdController -> ":BirdServiceImpl" as BirdServiceImpl ++ #application : deleteBird(birdId)
+BirdServiceImpl -> ":BirdRepository" as BirdRepository ++ #application : findById(birdId)
+BirdRepository -> BirdRepository : findById(birdId)
+BirdRepository --> BirdServiceImpl  -- : existingBird
+
+BirdServiceImpl -> BirdServiceImpl : check if bird exists
+BirdServiceImpl -> BirdRepository ++ #application : deleteById(birdId)
+BirdRepository -> BirdRepository : deleteById(birdId)
+BirdRepository --> BirdServiceImpl  -- : void
+
+BirdServiceImpl --> BirdController -- : void
+BirdController --> UI -- : Bird deleted successfully
+UI --> user -- : Bird deleted successfully
+@enduml

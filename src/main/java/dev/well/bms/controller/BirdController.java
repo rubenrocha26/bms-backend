@@ -45,4 +45,11 @@ public class BirdController {
         BirdDto updatedBirdDto = birdService.updateBird(birdId, birdDto);
         return ResponseEntity.ok(updatedBirdDto);
     }
+
+    //Delete Bird REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteBird (@PathVariable("id") Long birdId){
+        birdService.deleteBird(birdId);
+        return ResponseEntity.ok("Bird deleted successfully");
+    }
 }

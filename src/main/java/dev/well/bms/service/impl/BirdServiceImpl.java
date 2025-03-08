@@ -60,4 +60,13 @@ public class BirdServiceImpl implements IBirdService {
 
         return birdMapper.mapToBirdDto(updatedBirdFromRepository);
     }
+
+    @Override
+    public void deleteBird(Long birdId) {
+        Bird bird = birdRepository.findById(birdId)
+                .orElseThrow(()->
+                        new ResourceNotFoundException("Bird does not exist with given id : " + birdId));
+
+        birdRepository.deleteById(birdId);
+    }
 }

@@ -12,4 +12,6 @@ public interface IBirdService {
     List<BirdDto> getAllBirds();
 
     BirdDto updateBird (Long birdId, BirdDto updatedBird);
+
+    void deleteBird (Long birdId);
 }
