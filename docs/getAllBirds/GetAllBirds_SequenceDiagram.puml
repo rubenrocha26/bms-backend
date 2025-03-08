@@ -2,7 +2,7 @@
 actor user
 autonumber
 
-title: CreateBird_SequenceDiagram
+title: GetAllBirds_SequenceDiagram
 
 user -> UI ++ #application : I want to get all bird
 UI -> ":GetAllBirdsController" as GetAllBirdsController ++ #application : getAllBirds()

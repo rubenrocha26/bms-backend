@@ -2,7 +2,7 @@
 actor user
 autonumber
 
-title: CreateBird_SequenceDiagram
+title: GetBirdById_SequenceDiagram
 
 user -> UI ++ #application : I want to get a bird
 UI --> user -- : bird id?
