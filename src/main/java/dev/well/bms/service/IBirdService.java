@@ -4,4 +4,6 @@ import dev.well.bms.dto.BirdDto;
 
 public interface IBirdService {
     BirdDto createBird (BirdDto birdDto);
+
+    BirdDto getBirdById (Long birdId);
 }

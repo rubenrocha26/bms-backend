@@ -2,6 +2,7 @@ package dev.well.bms.service.impl;
 
 import dev.well.bms.dto.BirdDto;
 import dev.well.bms.entity.Bird;
+import dev.well.bms.exception.ResourceNotFoundException;
 import dev.well.bms.mapper.BirdMapper;
 import dev.well.bms.repository.BirdRepository;
 import dev.well.bms.service.IBirdService;
@@ -25,5 +26,13 @@ public class BirdServiceImpl implements IBirdService {
         Bird savedBird = birdRepository.save(bird);
 
         return birdMapper.mapToBirdDto(savedBird);
+    }
+
+    @Override
+    public BirdDto getBirdById(Long birdId) {
+        Bird bird = birdRepository.findById(birdId)
+                .orElseThrow(()->
+                        new ResourceNotFoundException("Bird does not exist with given id : " + birdId));
+        return birdMapper.mapToBirdDto(bird);
     }
 }
