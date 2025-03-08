@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/birds")
 public class BirdController {
@@ -28,5 +30,12 @@ public class BirdController {
     public ResponseEntity<BirdDto> getBirdById (@PathVariable("id") Long birdId){
         BirdDto birdDto = birdService.getBirdById(birdId);
         return  ResponseEntity.ok(birdDto);
+    }
+
+    //Get All Birds REST API
+    @GetMapping
+    public ResponseEntity<List<BirdDto>> getAllBirds(){
+        List<BirdDto> birds = birdService.getAllBirds();
+        return ResponseEntity.ok(birds);
     }
 }

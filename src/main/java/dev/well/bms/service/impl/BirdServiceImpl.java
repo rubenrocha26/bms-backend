@@ -8,6 +8,9 @@ import dev.well.bms.repository.BirdRepository;
 import dev.well.bms.service.IBirdService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class BirdServiceImpl implements IBirdService {
 
@@ -34,5 +37,12 @@ public class BirdServiceImpl implements IBirdService {
                 .orElseThrow(()->
                         new ResourceNotFoundException("Bird does not exist with given id : " + birdId));
         return birdMapper.mapToBirdDto(bird);
+    }
+
+    @Override
+    public List<BirdDto> getAllBirds() {
+        List<Bird> birds = birdRepository.findAll();
+
+        return birds.stream().map((bird ) -> birdMapper.mapToBirdDto(bird) ).collect(Collectors.toList());
     }
 }
