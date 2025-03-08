@@ -38,4 +38,11 @@ public class BirdController {
         List<BirdDto> birds = birdService.getAllBirds();
         return ResponseEntity.ok(birds);
     }
+
+    //Update Bird REST API
+    @PutMapping("{id}")
+    public ResponseEntity<BirdDto> updateBird (@PathVariable("id") Long birdId, @RequestBody BirdDto birdDto){
+        BirdDto updatedBirdDto = birdService.updateBird(birdId, birdDto);
+        return ResponseEntity.ok(updatedBirdDto);
+    }
 }

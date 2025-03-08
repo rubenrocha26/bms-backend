@@ -45,4 +45,19 @@ public class BirdServiceImpl implements IBirdService {
 
         return birds.stream().map((bird ) -> birdMapper.mapToBirdDto(bird) ).collect(Collectors.toList());
     }
+
+    @Override
+    public BirdDto updateBird(Long birdId, BirdDto updatedBird) {
+        Bird bird = birdRepository.findById(birdId)
+                .orElseThrow(()->
+                        new ResourceNotFoundException("Bird does not exist with given id : " + birdId));
+        bird.setScientificName(updatedBird.getScientificName());
+        bird.setMutation(updatedBird.getMutation());
+        bird.setBirdRing(updatedBird.getBirdRing());
+        bird.setDateOfBirth(updatedBird.getDateOfBirth());
+
+        Bird updatedBirdFromRepository = birdRepository.save(bird);
+
+        return birdMapper.mapToBirdDto(updatedBirdFromRepository);
+    }
 }

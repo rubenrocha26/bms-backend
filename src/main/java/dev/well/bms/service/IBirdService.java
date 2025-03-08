@@ -10,4 +10,6 @@ public interface IBirdService {
     BirdDto getBirdById (Long birdId);
 
     List<BirdDto> getAllBirds();
+
+    BirdDto updateBird (Long birdId, BirdDto updatedBird);
 }
