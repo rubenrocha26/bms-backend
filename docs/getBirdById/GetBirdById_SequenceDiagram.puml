@@ -1,0 +1,34 @@
+@startuml
+actor user
+autonumber
+
+title: CreateBird_SequenceDiagram
+
+user -> UI ++ #application : I want to get a bird
+UI --> user -- : bird id?
+user -> UI ++ #application : birdId
+UI -> ":GetBirdByIdController" as GetBirdByIdController ++ #application : getBirdById(birdId)
+
+GetBirdByIdController -> ":BirdServiceImpl" as BirdServiceImpl ++ #application : getBirdById(birdId)
+BirdServiceImpl -> ":BirdRepository" as BirdRepository ++ #application : findBirdById(birdId)
+BirdRepository -> BirdRepository : doesBirdExist(birdId)?
+BirdRepository --> BirdServiceImpl -- : bird1
+
+BirdServiceImpl -> BirdMapper ++ #application : mapToBirdDto(bird1)
+BirdMapper -> BirdMapper : getId
+BirdMapper -> BirdMapper : getScientificName
+BirdMapper -> BirdMapper : getMutation
+BirdMapper -> BirdMapper : getBirdRing
+BirdMapper -> BirdMapper : getDateOfBirth
+
+BirdMapper -> "BirdDtoFactory" as BirdDtoFactory ++ #application : createBirdDto(id, scientificName, mutation, birdRing, dateOfBirth)
+create "birdDto1:BirdDto" as BirdDto
+BirdDtoFactory -> BirdDto ++ #application : <create> (id, scientificName, mutation, birdRing, dateOfBirth)
+BirdDto --> BirdDtoFactory -- : birdDto1
+BirdDtoFactory --> BirdMapper -- : birdDto1
+BirdMapper --> BirdServiceImpl -- : birdDto1
+BirdServiceImpl --> GetBirdByIdController -- : birdDto1
+GetBirdByIdController --> UI -- : birdDto1
+UI --> user -- : birdDto1
+
+@enduml

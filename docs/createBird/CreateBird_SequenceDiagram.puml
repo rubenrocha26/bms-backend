@@ -43,4 +43,5 @@ BirdDtoFactory --> BirdMapper -- : birdDto1
 BirdMapper --> BirdServiceImpl -- :birdDto1
 BirdServiceImpl --> CreateBirdController -- : birdDto1
 CreateBirdController --> UI -- : birdDto1
+UI --> user -- : birdDto1
 @enduml
