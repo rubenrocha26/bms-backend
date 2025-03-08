@@ -1,0 +1,32 @@
+@startuml
+actor user
+autonumber
+
+title: CreateBird_SequenceDiagram
+
+user -> UI ++ #application : I want to get all bird
+UI -> ":GetAllBirdsController" as GetAllBirdsController ++ #application : getAllBirds()
+
+GetAllBirdsController -> ":BirdServiceImpl" as BirdServiceImpl ++ #application : getAllBirds()
+BirdServiceImpl -> ":BirdRepository" as BirdRepository ++ #application : findAll()
+BirdRepository --> BirdMapper ++ #application : mapToBirdDto(List<birds>)
+BirdMapper -> BirdMapper : getId
+BirdMapper -> BirdMapper : getScientificName
+BirdMapper -> BirdMapper : getMutation
+BirdMapper -> BirdMapper : getBirdRing
+BirdMapper -> BirdMapper : getDateOfBirth
+
+BirdMapper -> "BirdDtoFactory" as BirdDtoFactory ++ #application : createBirdDto(id, scientificName, mutation, birdRing, dateOfBirth)
+create "birdDto1:BirdDto" as BirdDto
+BirdDtoFactory -> BirdDto ++ #application : <create> (id, scientificName, mutation, birdRing, dateOfBirth)
+BirdDto --> BirdDtoFactory -- : birdDto1
+BirdDtoFactory --> BirdMapper -- : birdDto1
+BirdMapper --> BirdRepository -- : birdDto1
+BirdRepository -> BirdRepository : List<birdsDto>.add(birdDto1)
+BirdRepository --> BirdServiceImpl -- : List<birdsDto>
+
+BirdServiceImpl --> GetAllBirdsController -- : List<birdsDto>
+GetAllBirdsController --> UI -- : List<birdsDto>
+UI --> user -- : List<birdsDto>
+
+@enduml
