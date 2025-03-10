@@ -26,9 +26,15 @@ public class BirdServiceImpl implements IBirdService {
     public BirdDto createBird(BirdDto birdDto) {
 
         Bird bird = birdMapper.mapToBird(birdDto);
-        Bird savedBird = birdRepository.save(bird);
 
-        return birdMapper.mapToBirdDto(savedBird);
+        //If birdRingAlready registered
+        if(birdRepository.existsByBirdRing(bird.getBirdRing())){
+            throw new IllegalArgumentException("Bird with the same birdRing already exists");
+        }else {
+            Bird savedBird = birdRepository.save(bird);
+
+            return birdMapper.mapToBirdDto(savedBird);
+        }
     }
 
     @Override

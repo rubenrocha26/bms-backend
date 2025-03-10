@@ -21,8 +21,13 @@ public class BirdController {
     //Add Bird REST API
     @PostMapping
     public ResponseEntity<BirdDto> createBird (@RequestBody BirdDto birdDto){
-        BirdDto savedBird = birdService.createBird(birdDto);
-        return new ResponseEntity<>(savedBird, HttpStatus.CREATED);
+        try {
+            BirdDto savedBird = birdService.createBird(birdDto);
+            return new ResponseEntity<>(savedBird, HttpStatus.CREATED);
+
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(birdDto, HttpStatus.BAD_REQUEST);
+        }
     }
 
     //Get Bird REST API
