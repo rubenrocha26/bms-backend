@@ -1,7 +1,7 @@
 package dev.well.bms.mapper;
 
 import dev.well.bms.dto.BirdDto;
-import dev.well.bms.entity.Bird;
+import dev.well.bms.domain.Bird;
 import dev.well.bms.factory.BirdDtoFactory;
 import dev.well.bms.factory.BirdFactory;
 import org.junit.jupiter.api.Test;

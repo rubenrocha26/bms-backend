@@ -1,11 +1,9 @@
 package dev.well.bms.controller;
 
 import dev.well.bms.dto.BirdDto;
-import dev.well.bms.entity.Bird;
+import dev.well.bms.domain.Bird;
 import dev.well.bms.factory.BirdDtoFactory;
 import dev.well.bms.factory.BirdFactory;
-import dev.well.bms.mapper.BirdMapper;
-import dev.well.bms.repository.BirdRepository;
 import dev.well.bms.service.impl.BirdServiceImpl;
 import org.junit.jupiter.api.Test;
 

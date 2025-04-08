@@ -1,7 +1,7 @@
 package dev.well.bms.service.impl;
 
 import dev.well.bms.dto.BirdDto;
-import dev.well.bms.entity.Bird;
+import dev.well.bms.domain.Bird;
 import dev.well.bms.exception.ResourceNotFoundException;
 import dev.well.bms.mapper.BirdMapper;
 import dev.well.bms.repository.BirdRepository;

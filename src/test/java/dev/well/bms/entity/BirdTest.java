@@ -1,10 +1,10 @@
 package dev.well.bms.entity;
 
+import dev.well.bms.domain.Bird;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mockConstruction;
 
 class BirdTest {
 

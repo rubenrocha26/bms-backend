@@ -1,6 +1,6 @@
 package dev.well.bms.factory;
 
-import dev.well.bms.entity.Bird;
+import dev.well.bms.domain.Bird;
 import org.springframework.stereotype.Component;
 
 @Component
