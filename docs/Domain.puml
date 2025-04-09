@@ -1,0 +1,46 @@
+@startuml
+
+package "Bird Aggregate"{
+    entity "<<Root>>\n <<Entity>>\n Bird" as BE
+    entity "<<Entity>>\n Mutation" as MUT
+}
+
+class "<<Value Object>>\n BirdScientificName" as BSN
+
+class "<<Value Object>>\n BirdRing" as BR
+
+class "<<Value Object>>\n DateOfBirth" as DB
+
+class "<<Value Object>>\n Description" as DC
+
+class "<<Value Object>>\n Color" as CL
+
+
+
+BE "*" -r-> "1" MUT
+
+'uses Bird
+BE "1" --> "uses1" BSN
+BE "1" --> "uses1" BR
+BE "1" --> "uses1" DB
+
+'uses Mutation
+MUT "1" --> "uses1" DC
+MUT "1" --> "uses1" CL
+
+package "Cage Aggregate"{
+    entity "<<Root>>\n <<Entity>>\n Cage" as CG
+}
+
+class "<<Value Object>>\n Size" as SZ
+
+'uses cage
+CG "1" -l-> "1" SZ
+
+package "BirdInCage Aggregate"{
+    entity "<<Root>>\n <<Entity>>\n BirdInCage" as BCG
+}
+
+BCG "1" --> "*" BE
+BCG "1" -u-> "1" CG
+@enduml
