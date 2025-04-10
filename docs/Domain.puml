@@ -10,13 +10,14 @@ class "<<Value Object>>\n BirdRing" as BR
 
 class "<<Value Object>>\n DateOfBirth" as DB
 
+class "<<Value Object>>\n State" as ST
+
 package "Mutation Aggregate"{
     entity "<<Entity>>\n Mutation" as MUT
 }
 
 class "<<Value Object>>\n Description" as DC
 
-class "<<Value Object>>\n Color" as CL
 
 
 
@@ -26,10 +27,10 @@ BE "*" -r-> "1" MUT
 BE "1" --> "uses1" BSN
 BE "1" --> "uses1" BR
 BE "1" --> "uses1" DB
+BE "1" --> "uses1" ST
 
 'uses Mutation
 MUT "1" --> "uses1" DC
-MUT "1" --> "uses1" CL
 
 package "Cage Aggregate"{
     entity "<<Root>>\n <<Entity>>\n Cage" as CG

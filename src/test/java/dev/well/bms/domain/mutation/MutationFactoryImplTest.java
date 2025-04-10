@@ -1,6 +1,4 @@
 package dev.well.bms.domain.mutation;
-
-import dev.well.bms.domain.valueObject.Color;
 import dev.well.bms.domain.valueObject.Description;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedConstruction;
@@ -15,12 +13,11 @@ class MutationFactoryImplTest {
     void givenMockedConstructorMutationFactoryShouldCreateAccessMethod() throws InstantiationException {
         //arrange
         MutationFactoryImpl mutationFactoryImpl = new MutationFactoryImpl();
-        Color color = mock(Color.class);
         Description description = mock(Description.class);
         try (MockedConstruction<Mutation> mockMutation = mockConstruction(Mutation.class, (mock, context) ->{
         })) {
             //act
-            Mutation mutation = mutationFactoryImpl.createMutation(color, description);
+            Mutation mutation = mutationFactoryImpl.createMutation(description);
             //assert
             assertNotNull(mutation);
 
@@ -36,7 +33,6 @@ class MutationFactoryImplTest {
     void mockingConstructorThrowingException(){
         //arrange
         MutationFactoryImpl mutationFactoryImpl = new MutationFactoryImpl();
-        Color color = mock(Color.class);
         Description description = mock(Description.class);
         //Use try-with-resources to mock construction and throw an exception
         try (MockedConstruction<Mutation> mock = mockConstruction(Mutation.class,(mocked, context) ->
@@ -46,7 +42,7 @@ class MutationFactoryImplTest {
         })) {
             //Act: trying to create accessMethod will throw the exception
             try {
-                mutationFactoryImpl.createMutation(color, description);
+                mutationFactoryImpl.createMutation (description);
                 fail("Expect exception not thrown");
             } catch (Exception e) {
                 //Assertion to check if the exception is thrown
