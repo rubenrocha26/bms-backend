@@ -4,8 +4,6 @@ import dev.well.bms.domain.valueObject.Color;
 import dev.well.bms.domain.valueObject.Description;
 import dev.well.bms.domain.valueObject.MutationId;
 
-import java.util.UUID;
-
 public class MutationFactoryImpl implements IMutationFactory {
 
     @Override

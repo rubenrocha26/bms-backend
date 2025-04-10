@@ -1,11 +1,12 @@
 package dev.well.bms.domain.mutation;
 
+import dev.well.bms.ddd.AggregateRoot;
 import dev.well.bms.ddd.DomainEntity;
 import dev.well.bms.domain.valueObject.Color;
 import dev.well.bms.domain.valueObject.Description;
 import dev.well.bms.domain.valueObject.MutationId;
 
-public class Mutation implements DomainEntity<MutationId> {
+public class Mutation implements AggregateRoot<MutationId> {
     private final MutationId _mutationId;
     private final Color _color;
     private final Description _description;
