@@ -2,7 +2,6 @@
 
 package "Bird Aggregate"{
     entity "<<Root>>\n <<Entity>>\n Bird" as BE
-    entity "<<Entity>>\n Mutation" as MUT
 }
 
 class "<<Value Object>>\n BirdScientificName" as BSN
@@ -10,6 +9,10 @@ class "<<Value Object>>\n BirdScientificName" as BSN
 class "<<Value Object>>\n BirdRing" as BR
 
 class "<<Value Object>>\n DateOfBirth" as DB
+
+package "Mutation Aggregate"{
+    entity "<<Entity>>\n Mutation" as MUT
+}
 
 class "<<Value Object>>\n Description" as DC
 
