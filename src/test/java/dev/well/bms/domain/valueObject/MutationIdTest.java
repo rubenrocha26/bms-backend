@@ -2,24 +2,42 @@ package dev.well.bms.domain.valueObject;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MutationIdTest {
     @Test
     void shouldCreateMutationId() {
         //arrange
+        String id = UUID.randomUUID().toString();
         //act
-        MutationId mutationId = new MutationId();
+        MutationId mutationId = new MutationId(id);
         //assert
         assertNotNull(mutationId);
     }
 
     @Test
+    void nullIdShouldThrowException() {
+        //arrange
+        //act + assert
+        assertThrows(IllegalArgumentException.class, () -> new MutationId(null));
+    }
+
+    @Test
+    void emptyIdShouldThrowException() {
+        //arrange
+        //act + assert
+        assertThrows(IllegalArgumentException.class, () -> new MutationId(""));
+    }
+
+    @Test
     void testEquals() {
         //arrange
-        MutationId mutationId1 = new MutationId();
-        MutationId mutationId2 = new MutationId();
-        String id1 = mutationId1.toString();
+        String id1 = UUID.randomUUID().toString();
+        String id2 = UUID.randomUUID().toString();
+        MutationId mutationId1 = new MutationId(id1);
+        MutationId mutationId2 = new MutationId(id2);
         //act
         boolean result1 = mutationId1.equals(mutationId1);
         boolean result2 = mutationId1.equals(mutationId2);
@@ -31,12 +49,13 @@ class MutationIdTest {
     }
 
     @Test
-    void testToString() {
+    void shouldReturnStringId(){
         //arrange
-        MutationId mutationId1 = new MutationId();
+        String id1 = UUID.randomUUID().toString();
+        MutationId mutationId1 = new MutationId(id1);
         //act
-        String id1 = mutationId1.toString();
+        String result = mutationId1.toString();
         //assert
-        assertEquals(id1, mutationId1.toString());
+        assertEquals(id1, result);
     }
 }

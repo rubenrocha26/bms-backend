@@ -42,4 +42,8 @@ public class Mutation implements AggregateRoot<MutationId> {
         }
         return false;
     }
+
+    public Description getDescription() {
+        return _description;
+    }
 }

@@ -2,13 +2,12 @@ package dev.well.bms.domain.valueObject;
 
 import dev.well.bms.ddd.DomainId;
 
-import java.util.UUID;
-
 public class MutationId implements DomainId {
-    private final UUID _mutationId;
+    private final String _mutationId;
 
-    public MutationId () {
-        this._mutationId = UUID.randomUUID();
+    public MutationId (String mutationId) {
+        if (mutationId == null || mutationId.isBlank()) throw new IllegalArgumentException("Id cannot be null or empty");
+        this._mutationId = mutationId;
     }
 
     @Override
@@ -22,7 +21,7 @@ public class MutationId implements DomainId {
     }
 
     @Override
-    public String toString() {
-        return this._mutationId.toString();
+    public String toString () {
+        return _mutationId;
     }
 }

@@ -97,4 +97,14 @@ class MutationTest {
         assertTrue(result6);
         assertFalse(result7);
     }
+
+    @Test
+    void shouldReturnTheDescription() {
+        //arrange
+        Description description = mock(Description.class);
+        MutationId mutationId = mock(MutationId.class);
+        Mutation mutation = new Mutation(mutationId, description);
+        //act + assert
+        assertEquals(description, mutation.getDescription());
+    }
 }
