@@ -1,7 +1,6 @@
 package dev.well.bms.domain.mutation;
 
 import dev.well.bms.ddd.DomainEntity;
-import dev.well.bms.ddd.ValueObject;
 import dev.well.bms.domain.valueObject.Color;
 import dev.well.bms.domain.valueObject.Description;
 import dev.well.bms.domain.valueObject.MutationId;
@@ -11,8 +10,11 @@ public class Mutation implements DomainEntity<MutationId> {
     private final Color _color;
     private final Description _description;
 
-    public Mutation (MutationId id, Color color, Description description) {
-        this._mutationId = id;
+    protected Mutation (MutationId mutationId, Color color, Description description) {
+        if (mutationId == null) {
+            throw new IllegalArgumentException("Id cannot be null");
+        }
+        this._mutationId = mutationId;
 
         if(color == null) {
             throw new IllegalArgumentException("Color cannot be null or blank");
@@ -37,11 +39,14 @@ public class Mutation implements DomainEntity<MutationId> {
 
     @Override
     public MutationId identity() {
-        return null;
+        return this._mutationId;
     }
 
     @Override
     public boolean sameAs (Object objectToCompare){
-        return true;
+        if (objectToCompare instanceof Mutation mutation) {
+            return this._mutationId.equals(mutation._mutationId) && this._color.equals(mutation._color) && this._description.equals(mutation._description);
+        }
+        return false;
     }
 }
