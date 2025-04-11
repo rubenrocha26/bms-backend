@@ -21,7 +21,7 @@ class "<<Value Object>>\n Description" as DC
 
 
 
-BE "*" -r-> "1" MUT
+BE "*" -r-> "0..1" MUT
 
 'uses Bird
 BE "1" --> "uses1" BSN

@@ -1,5 +1,5 @@
 package dev.well.bms.persistence.dataModel;
-import dev.well.bms.domain.mutation.IMutationFactory;
+import dev.well.bms.domain.mutation.IFactoryMutation;
 import dev.well.bms.domain.mutation.Mutation;
 import dev.well.bms.domain.valueObject.Description;
 import dev.well.bms.domain.valueObject.MutationId;
@@ -29,14 +29,14 @@ public class MutationDataModel {
 
     }
 
-    static public Mutation toDomain (IMutationFactory mutationFactory, MutationDataModel mutationDataModel){
+    static public Mutation toDomain (IFactoryMutation mutationFactory, MutationDataModel mutationDataModel){
         MutationId mutationId = new MutationId(mutationDataModel._mutationId);
         Description description = new Description(mutationDataModel._description);
 
         return mutationFactory.createMutation(mutationId, description);
     }
 
-    static public Iterable<Mutation> toDomain (IMutationFactory mutationFactory, Iterable<MutationDataModel> listMutationDataModel){
+    static public Iterable<Mutation> toDomain (IFactoryMutation mutationFactory, Iterable<MutationDataModel> listMutationDataModel){
         List<Mutation> listMutationDomain = new ArrayList<>();
 
         listMutationDataModel.forEach(mutationDataModel ->{

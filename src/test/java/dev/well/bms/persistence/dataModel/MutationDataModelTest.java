@@ -1,8 +1,8 @@
 package dev.well.bms.persistence.dataModel;
 
-import dev.well.bms.domain.mutation.IMutationFactory;
+import dev.well.bms.domain.mutation.IFactoryMutation;
 import dev.well.bms.domain.mutation.Mutation;
-import dev.well.bms.domain.mutation.MutationFactoryImpl;
+import dev.well.bms.domain.mutation.FactoryMutationImpl;
 import dev.well.bms.domain.valueObject.Description;
 import dev.well.bms.domain.valueObject.MutationId;
 import org.junit.jupiter.api.Test;
@@ -44,7 +44,7 @@ class MutationDataModelTest {
     @Test
     void toDomain() {
         //arrange
-        IMutationFactory mutationFactory = new MutationFactoryImpl();
+        IFactoryMutation mutationFactory = new FactoryMutationImpl();
         Description description = new Description("Classico");
         Mutation mutation = mutationFactory.createMutation(description);
         MutationDataModel mutationDataModel = new MutationDataModel(mutation);
@@ -58,7 +58,7 @@ class MutationDataModelTest {
     @Test
     void nullDataModelThrowsException() {
         //arrange
-        IMutationFactory mutationFactory = new MutationFactoryImpl();
+        IFactoryMutation mutationFactory = new FactoryMutationImpl();
         MutationDataModel mutationDataModel = null;
         //act + assert
         assertThrows(NullPointerException.class,() -> MutationDataModel.toDomain(mutationFactory, mutationDataModel));
@@ -67,7 +67,7 @@ class MutationDataModelTest {
     @Test
     void testIterableMutationToDomain() {
         //arrange
-        IMutationFactory mutationFactory = new MutationFactoryImpl();
+        IFactoryMutation mutationFactory = new FactoryMutationImpl();
         Description description = new Description("Classico");
         Mutation mutation1 = mutationFactory.createMutation(description);
         MutationDataModel mutationDataModel = new MutationDataModel(mutation1);
