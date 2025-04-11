@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockConstruction;
 
-class MutationFactoryImplTest {
+class FactoryMutationImplTest {
 
     @Test
     void givenMockedConstructorMutationFactoryShouldCreateMutation() {
         //arrange
-        MutationFactoryImpl mutationFactoryImpl = new MutationFactoryImpl();
+        FactoryMutationImpl mutationFactoryImpl = new FactoryMutationImpl();
         MutationId mutationId = mock(MutationId.class);
         Description description = mock(Description.class);
         try (MockedConstruction<Mutation> mockMutation = mockConstruction(Mutation.class, (mock, context) ->{
@@ -34,7 +34,7 @@ class MutationFactoryImplTest {
     @Test
     void mockingConstructorThrowingException(){
         //arrange
-        MutationFactoryImpl mutationFactoryImpl = new MutationFactoryImpl();
+        FactoryMutationImpl mutationFactoryImpl = new FactoryMutationImpl();
         MutationId mutationId = mock(MutationId.class);
         Description description = mock(Description.class);
         //Use try-with-resources to mock construction and throw an exception
@@ -57,7 +57,7 @@ class MutationFactoryImplTest {
     @Test
     void givenMockedConstructorMutationFactoryShouldCreateMutationWithDescription() {
         //arrange
-        MutationFactoryImpl mutationFactoryImpl = new MutationFactoryImpl();
+        FactoryMutationImpl mutationFactoryImpl = new FactoryMutationImpl();
         Description description = mock(Description.class);
         try (MockedConstruction<Mutation> mockMutation = mockConstruction(Mutation.class, (mock, context) ->{
         })) {
@@ -77,7 +77,7 @@ class MutationFactoryImplTest {
     @Test
     void mockingConstructorWithDescriptionThrowingException() {
         //arrange
-        MutationFactoryImpl mutationFactoryImpl = new MutationFactoryImpl();
+        FactoryMutationImpl mutationFactoryImpl = new FactoryMutationImpl();
         Description description = mock(Description.class);
         //Use try-with-resources to mock construction and throw an exception
         try (MockedConstruction<Mutation> mock = mockConstruction(Mutation.class, (mocked, context) ->
