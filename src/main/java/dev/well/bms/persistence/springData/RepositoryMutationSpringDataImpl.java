@@ -22,7 +22,7 @@ public class RepositoryMutationSpringDataImpl implements IRepositoryMutation {
 
     @Override
     public Mutation save (Mutation mutation) {
-        if (mutation==null) throw new IllegalArgumentException();
+        if (mutation==null) throw new IllegalArgumentException("Mutation is null");
 
         MutationDataModel mutationDataModel = new MutationDataModel(mutation);
 
