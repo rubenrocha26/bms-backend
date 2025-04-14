@@ -1,15 +1,9 @@
 package dev.well.bms.persistence.dataModel;
-import dev.well.bms.domain.mutation.IFactoryMutation;
 import dev.well.bms.domain.mutation.Mutation;
-import dev.well.bms.domain.valueObject.Description;
-import dev.well.bms.domain.valueObject.MutationId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "MUTATION")
@@ -29,23 +23,11 @@ public class MutationDataModel {
 
     }
 
-    static public Mutation toDomain (IFactoryMutation mutationFactory, MutationDataModel mutationDataModel){
-        MutationId mutationId = new MutationId(mutationDataModel._mutationId);
-        Description description = new Description(mutationDataModel._description);
-
-        return mutationFactory.createMutation(mutationId, description);
+    public String getMutationId() {
+        return this._mutationId;
     }
 
-    static public Iterable<Mutation> toDomain (IFactoryMutation mutationFactory, Iterable<MutationDataModel> listMutationDataModel){
-        List<Mutation> listMutationDomain = new ArrayList<>();
-
-        listMutationDataModel.forEach(mutationDataModel ->{
-            Mutation mutationDomain = toDomain(mutationFactory, mutationDataModel);
-
-            listMutationDomain.add(mutationDomain);
-
-        });
-
-        return listMutationDomain;
+    public String getDescription() {
+        return this._description;
     }
 }
