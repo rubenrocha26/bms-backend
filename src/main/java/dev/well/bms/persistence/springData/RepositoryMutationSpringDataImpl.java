@@ -14,9 +14,9 @@ public class RepositoryMutationSpringDataImpl implements IRepositoryMutation {
     private final IRepositoryMutationSpringData _repositoryMutationSpringData;
     private final MapperMutation _mapperMutation;
 
-    public RepositoryMutationSpringDataImpl(IRepositoryMutationSpringData repositoryMutationSpringData) {
+    public RepositoryMutationSpringDataImpl(IRepositoryMutationSpringData repositoryMutationSpringData, MapperMutation mapperMutation) {
         this._repositoryMutationSpringData = repositoryMutationSpringData;
-        this._mapperMutation = new MapperMutation();
+        this._mapperMutation = mapperMutation;
     }
 
     @Override
@@ -25,7 +25,8 @@ public class RepositoryMutationSpringDataImpl implements IRepositoryMutation {
 
         MutationDataModel mutationDataModel = new MutationDataModel(mutation);
 
-        this._repositoryMutationSpringData.save(mutationDataModel);
+        //cria um mutationDataModelSaved, mas é retornado objeto de domínio
+        MutationDataModel mutationDataModelSaved = this._repositoryMutationSpringData.save(mutationDataModel);
 
         return mutation;
     }

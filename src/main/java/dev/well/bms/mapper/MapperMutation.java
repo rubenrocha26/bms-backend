@@ -6,10 +6,12 @@ import dev.well.bms.domain.mutation.Mutation;
 import dev.well.bms.domain.valueObject.Description;
 import dev.well.bms.domain.valueObject.MutationId;
 import dev.well.bms.persistence.dataModel.MutationDataModel;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class MapperMutation {
     private final IFactoryMutation _mutationFactory = new FactoryMutationImpl();
 
