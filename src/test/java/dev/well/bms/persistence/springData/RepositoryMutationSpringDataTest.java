@@ -3,7 +3,7 @@ package dev.well.bms.persistence.springData;
 import dev.well.bms.domain.mutation.Mutation;
 import dev.well.bms.domain.valueObject.Description;
 import dev.well.bms.domain.valueObject.MutationId;
-import dev.well.bms.mapper.impl.MapperMutation;
+import dev.well.bms.mapper.impl.MapperMutationSpringDataImpl;
 import dev.well.bms.persistence.dataModel.MutationDataModel;
 import org.junit.jupiter.api.Test;
 
@@ -15,15 +15,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class RepositoryMutationSpringDataImplTest {
+class RepositoryMutationSpringDataTest {
 
     @Test
     void shouldCreateRepositoryMutation() {
         //arrange
         IRepositoryMutationSpringData mutationSpringData = mock(IRepositoryMutationSpringData.class);
-        MapperMutation mapperMutation = mock(MapperMutation.class);
+        MapperMutationSpringDataImpl mapperMutation = mock(MapperMutationSpringDataImpl.class);
         //act
-        RepositoryMutationSpringDataImpl repositoryMutationSpringData = new RepositoryMutationSpringDataImpl(mutationSpringData, mapperMutation);
+        RepositoryMutationSpringData repositoryMutationSpringData = new RepositoryMutationSpringData(mutationSpringData, mapperMutation);
         //assert
         assertNotNull(repositoryMutationSpringData);
     }
@@ -32,8 +32,8 @@ class RepositoryMutationSpringDataImplTest {
     void shouldSaveMutation() {
         //arrange
         IRepositoryMutationSpringData mutationSpringData = mock(IRepositoryMutationSpringData.class);
-        MapperMutation mapperMutation = mock(MapperMutation.class);
-        RepositoryMutationSpringDataImpl repositoryMutationSpringData = new RepositoryMutationSpringDataImpl(mutationSpringData, mapperMutation);
+        MapperMutationSpringDataImpl mapperMutation = mock(MapperMutationSpringDataImpl.class);
+        RepositoryMutationSpringData repositoryMutationSpringData = new RepositoryMutationSpringData(mutationSpringData, mapperMutation);
         Mutation mutation = mock(Mutation.class);
         when(mutation.identity()).thenReturn(mock(MutationId.class));
         when(mutation.getDescription()).thenReturn(mock(Description.class));
@@ -47,8 +47,8 @@ class RepositoryMutationSpringDataImplTest {
     void shouldThrowExceptionWhenMutationIdIsNull() {
         //arrange
         IRepositoryMutationSpringData mutationSpringData = mock(IRepositoryMutationSpringData.class);
-        MapperMutation mapperMutation = mock(MapperMutation.class);
-        RepositoryMutationSpringDataImpl repositoryMutationSpringData = new RepositoryMutationSpringDataImpl(mutationSpringData, mapperMutation);
+        MapperMutationSpringDataImpl mapperMutation = mock(MapperMutationSpringDataImpl.class);
+        RepositoryMutationSpringData repositoryMutationSpringData = new RepositoryMutationSpringData(mutationSpringData, mapperMutation);
         Mutation mutation = null;
         //act + assert
         assertThrows(IllegalArgumentException.class, () -> repositoryMutationSpringData.save(mutation));
@@ -58,8 +58,8 @@ class RepositoryMutationSpringDataImplTest {
     void findAll() {
         //arrange
         IRepositoryMutationSpringData mutationSpringData = mock(IRepositoryMutationSpringData.class);
-        MapperMutation mapperMutation = mock(MapperMutation.class);
-        RepositoryMutationSpringDataImpl repositoryMutationSpringData = new RepositoryMutationSpringDataImpl(mutationSpringData, mapperMutation);
+        MapperMutationSpringDataImpl mapperMutation = mock(MapperMutationSpringDataImpl.class);
+        RepositoryMutationSpringData repositoryMutationSpringData = new RepositoryMutationSpringData(mutationSpringData, mapperMutation);
 
         MutationDataModel mutationDataModel1 = mock(MutationDataModel.class);
         MutationDataModel mutationDataModel2 = mock(MutationDataModel.class);
@@ -91,8 +91,8 @@ class RepositoryMutationSpringDataImplTest {
     void shouldReturnMutationWhenOfIdentityIsCalledWithValidId() {
         // arrange
         IRepositoryMutationSpringData mutationSpringData = mock(IRepositoryMutationSpringData.class);
-        MapperMutation mapperMutation = mock(MapperMutation.class);
-        RepositoryMutationSpringDataImpl repositoryMutationSpringData = new RepositoryMutationSpringDataImpl(mutationSpringData, mapperMutation);
+        MapperMutationSpringDataImpl mapperMutation = mock(MapperMutationSpringDataImpl.class);
+        RepositoryMutationSpringData repositoryMutationSpringData = new RepositoryMutationSpringData(mutationSpringData, mapperMutation);
 
         MutationId mutationId = new MutationId("1");
         MutationDataModel mutationDataModel = mock(MutationDataModel.class);
@@ -115,8 +115,8 @@ class RepositoryMutationSpringDataImplTest {
     void shouldReturnEmptyWhenOfIdentityIsCalledWithInvalidId() {
         // arrange
         IRepositoryMutationSpringData mutationSpringData = mock(IRepositoryMutationSpringData.class);
-        MapperMutation mapperMutation = mock(MapperMutation.class);
-        RepositoryMutationSpringDataImpl repositoryMutationSpringData = new RepositoryMutationSpringDataImpl(mutationSpringData, mapperMutation);
+        MapperMutationSpringDataImpl mapperMutation = mock(MapperMutationSpringDataImpl.class);
+        RepositoryMutationSpringData repositoryMutationSpringData = new RepositoryMutationSpringData(mutationSpringData, mapperMutation);
 
         MutationId mutationId = new MutationId("invalid");
         when(mutationSpringData.findById("invalid")).thenReturn(Optional.empty());
@@ -132,8 +132,8 @@ class RepositoryMutationSpringDataImplTest {
     void shouldReturnTrueWhenContainsOfIdentityIsCalledWithExistingId() {
         // arrange
         IRepositoryMutationSpringData mutationSpringData = mock(IRepositoryMutationSpringData.class);
-        MapperMutation mapperMutation = mock(MapperMutation.class);
-        RepositoryMutationSpringDataImpl repositoryMutationSpringData = new RepositoryMutationSpringDataImpl(mutationSpringData, mapperMutation);
+        MapperMutationSpringDataImpl mapperMutation = mock(MapperMutationSpringDataImpl.class);
+        RepositoryMutationSpringData repositoryMutationSpringData = new RepositoryMutationSpringData(mutationSpringData, mapperMutation);
 
         MutationId mutationId = new MutationId("1");
         when(mutationSpringData.existsById("1")).thenReturn(true);
@@ -149,8 +149,8 @@ class RepositoryMutationSpringDataImplTest {
     void shouldReturnFalseWhenContainsOfIdentityIsCalledWithNonExistingId() {
         // arrange
         IRepositoryMutationSpringData mutationSpringData = mock(IRepositoryMutationSpringData.class);
-        MapperMutation mapperMutation = mock(MapperMutation.class);
-        RepositoryMutationSpringDataImpl repositoryMutationSpringData = new RepositoryMutationSpringDataImpl(mutationSpringData, mapperMutation);
+        MapperMutationSpringDataImpl mapperMutation = mock(MapperMutationSpringDataImpl.class);
+        RepositoryMutationSpringData repositoryMutationSpringData = new RepositoryMutationSpringData(mutationSpringData, mapperMutation);
 
         MutationId mutationId = new MutationId("invalid");
         when(mutationSpringData.existsById("invalid")).thenReturn(false);

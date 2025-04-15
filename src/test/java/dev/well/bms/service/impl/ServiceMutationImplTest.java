@@ -4,7 +4,7 @@ import dev.well.bms.domain.mutation.FactoryMutationImpl;
 import dev.well.bms.domain.mutation.IFactoryMutation;
 import dev.well.bms.domain.mutation.Mutation;
 import dev.well.bms.domain.valueObject.Description;
-import dev.well.bms.persistence.springData.RepositoryMutationSpringDataImpl;
+import dev.well.bms.persistence.springData.RepositoryMutationSpringData;
 import dev.well.bms.repository.IRepositoryMutation;
 import dev.well.bms.service.IServiceMutation;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ class ServiceMutationImplTest {
     void shouldCreateServiceMutation() {
         //arrange
         IFactoryMutation mutationFactory = new FactoryMutationImpl();
-        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringDataImpl.class);
+        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringData.class);
         //act
         IServiceMutation mutationService = new ServiceMutationImpl(mutationFactory, mutationRepository);
         //assert
@@ -41,7 +41,7 @@ class ServiceMutationImplTest {
     void shouldThrowExceptionIfMutationFactoryIsNull() {
         //arrange
         IFactoryMutation mutationFactory = null;
-        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringDataImpl.class);
+        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringData.class);
         //act + assert
         assertThrows(IllegalArgumentException.class, () -> new ServiceMutationImpl(mutationFactory, mutationRepository));
     }
@@ -50,7 +50,7 @@ class ServiceMutationImplTest {
     void shouldCreateMutation() {
         //arrange
         IFactoryMutation mutationFactory = new FactoryMutationImpl();
-        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringDataImpl.class);
+        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringData.class);
         IServiceMutation mutationService = new ServiceMutationImpl(mutationFactory, mutationRepository);
         Description description = new Description("description");
         //act
@@ -63,7 +63,7 @@ class ServiceMutationImplTest {
     void shouldThrowExceptionWhenDescriptionIsNull() {
         //arrange
         IFactoryMutation mutationFactory = new FactoryMutationImpl();
-        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringDataImpl.class);
+        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringData.class);
         IServiceMutation mutationService = new ServiceMutationImpl(mutationFactory, mutationRepository);
         Description description = null;
         //act + assert
@@ -74,7 +74,7 @@ class ServiceMutationImplTest {
     void shouldSaveMutation() {
         //arrange
         IFactoryMutation mutationFactory = new FactoryMutationImpl();
-        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringDataImpl.class);
+        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringData.class);
         IServiceMutation mutationService = new ServiceMutationImpl(mutationFactory, mutationRepository);
 
 
@@ -104,7 +104,7 @@ class ServiceMutationImplTest {
     void shouldThrowExceptionWhenMutationToBeSavedIsNull() {
         //arrange
         IFactoryMutation mutationFactory = new FactoryMutationImpl();
-        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringDataImpl.class);
+        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringData.class);
         IServiceMutation mutationService = new ServiceMutationImpl(mutationFactory, mutationRepository);
         Mutation mutation = null;
         //act + assert
@@ -115,7 +115,7 @@ class ServiceMutationImplTest {
     void shouldReturnOptionalEmptyWhenMutationWithSameDescriptionIsAlreadySaved() {
         //arrange
         IFactoryMutation mutationFactory = new FactoryMutationImpl();
-        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringDataImpl.class);
+        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringData.class);
         IServiceMutation mutationService = new ServiceMutationImpl(mutationFactory, mutationRepository);
 
         Description description = new Description("description");
@@ -133,7 +133,7 @@ class ServiceMutationImplTest {
     void shouldReturnOptionalEmptyWhenMutationWithSameIdIsAlreadySaved() {
         //arrange
         IFactoryMutation mutationFactory = new FactoryMutationImpl();
-        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringDataImpl.class);
+        IRepositoryMutation mutationRepository = mock(RepositoryMutationSpringData.class);
         IServiceMutation mutationService = new ServiceMutationImpl(mutationFactory, mutationRepository);
         Description description = new Description("description");
         Mutation existingMutation = mutationService.createMutation(description);

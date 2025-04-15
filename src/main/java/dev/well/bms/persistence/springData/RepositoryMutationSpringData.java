@@ -1,8 +1,7 @@
 package dev.well.bms.persistence.springData;
 import dev.well.bms.domain.mutation.Mutation;
 import dev.well.bms.domain.valueObject.MutationId;
-import dev.well.bms.mapper.IMapperMutation;
-import dev.well.bms.mapper.impl.MapperMutation;
+import dev.well.bms.mapper.IMapperMutationSpringData;
 import dev.well.bms.persistence.dataModel.MutationDataModel;
 import dev.well.bms.repository.IRepositoryMutation;
 import org.springframework.stereotype.Repository;
@@ -11,11 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class RepositoryMutationSpringDataImpl implements IRepositoryMutation {
+public class RepositoryMutationSpringData implements IRepositoryMutation {
     private final IRepositoryMutationSpringData _repositoryMutationSpringData;
-    private final IMapperMutation _mapperMutation;
+    private final IMapperMutationSpringData _mapperMutation;
 
-    public RepositoryMutationSpringDataImpl(IRepositoryMutationSpringData repositoryMutationSpringData, IMapperMutation mapperMutation) {
+    public RepositoryMutationSpringData(IRepositoryMutationSpringData repositoryMutationSpringData, IMapperMutationSpringData mapperMutation) {
         this._repositoryMutationSpringData = repositoryMutationSpringData;
         this._mapperMutation = mapperMutation;
     }
