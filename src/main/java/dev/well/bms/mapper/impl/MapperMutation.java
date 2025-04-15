@@ -1,10 +1,10 @@
-package dev.well.bms.mapper;
+package dev.well.bms.mapper.impl;
 
-import dev.well.bms.domain.mutation.FactoryMutationImpl;
 import dev.well.bms.domain.mutation.IFactoryMutation;
 import dev.well.bms.domain.mutation.Mutation;
 import dev.well.bms.domain.valueObject.Description;
 import dev.well.bms.domain.valueObject.MutationId;
+import dev.well.bms.mapper.IMapperMutation;
 import dev.well.bms.persistence.dataModel.MutationDataModel;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class MapperMutation {
+public class MapperMutation implements IMapperMutation {
     private final IFactoryMutation _mutationFactory;
 
-    public MapperMutation(IFactoryMutation mutationFactory) {
+    public MapperMutation (IFactoryMutation mutationFactory) {
         if (mutationFactory == null) {
             throw new IllegalArgumentException("MutationFactory cannot be null");
         }

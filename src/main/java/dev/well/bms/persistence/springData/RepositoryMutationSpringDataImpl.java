@@ -1,7 +1,7 @@
 package dev.well.bms.persistence.springData;
 import dev.well.bms.domain.mutation.Mutation;
 import dev.well.bms.domain.valueObject.MutationId;
-import dev.well.bms.mapper.MapperMutation;
+import dev.well.bms.mapper.impl.MapperMutation;
 import dev.well.bms.persistence.dataModel.MutationDataModel;
 import dev.well.bms.repository.IRepositoryMutation;
 import org.springframework.stereotype.Repository;

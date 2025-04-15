@@ -1,6 +1,5 @@
-package dev.well.bms.mapper;
+package dev.well.bms.mapper.impl;
 
-import dev.well.bms.domain.mutation.FactoryMutationImpl;
 import dev.well.bms.domain.mutation.IFactoryMutation;
 import dev.well.bms.domain.mutation.Mutation;
 import dev.well.bms.domain.valueObject.Description;
