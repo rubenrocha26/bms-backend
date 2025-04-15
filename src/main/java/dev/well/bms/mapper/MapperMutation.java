@@ -13,9 +13,14 @@ import java.util.List;
 
 @Component
 public class MapperMutation {
-    private final IFactoryMutation _mutationFactory = new FactoryMutationImpl();
+    private final IFactoryMutation _mutationFactory;
 
-    public MapperMutation(){}
+    public MapperMutation(IFactoryMutation mutationFactory) {
+        if (mutationFactory == null) {
+            throw new IllegalArgumentException("MutationFactory cannot be null");
+        }
+        this._mutationFactory = mutationFactory;
+    }
 
     public Mutation dataModelToDomain (MutationDataModel mutationDataModel){
         MutationId mutationId = new MutationId(mutationDataModel.getMutationId());

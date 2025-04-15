@@ -19,28 +19,48 @@ class MapperMutationTest {
     @Test
     void shouldCreateMapperMutation(){
         //arrange
+        IFactoryMutation mutationFactory = mock(IFactoryMutation.class);
         //act
-        MapperMutation mapperMutation = new MapperMutation();
+        MapperMutation mapperMutation = new MapperMutation(mutationFactory);
         //assert
         assertNotNull(mapperMutation);
     }
 
     @Test
+    void shouldThrowExceptionWhenMutationFactoryIsNull(){
+        //arrange
+        IFactoryMutation mutationFactory = null;
+        //act + assert
+        assertThrows(IllegalArgumentException.class, () -> new MapperMutation(mutationFactory));
+    }
+
+    @Test
     void dataModelToDomain() {
         //arrange
-        MapperMutation mapperMutation = new MapperMutation();
+        IFactoryMutation mutationFactory = mock(IFactoryMutation.class);
+        MapperMutation mapperMutation = new MapperMutation(mutationFactory);
         MutationDataModel mutationDataModel = mock(MutationDataModel.class);
         when(mutationDataModel.getMutationId()).thenReturn("mutationId");
         when(mutationDataModel.getDescription()).thenReturn("description");
+
+        Mutation mutation = mock(Mutation.class);
+        when(mutation.identity()).thenReturn(new MutationId("mutationId"));
+        when(mutation.getDescription()).thenReturn(new Description("description"));
+
+        when(mutationFactory.createMutation(new MutationId("mutationId"), new Description("description"))).thenReturn(mutation);
         //act
         Mutation result = mapperMutation.dataModelToDomain(mutationDataModel);
         //assert
         assertNotNull(result);
+        assertEquals("mutationId", result.identity().toString());
+        assertEquals("description", result.getDescription().toString());
     }
 
     @Test
     void testDataModelToDomain() {
-        MapperMutation mapperMutation = new MapperMutation();
+        // arrange
+        IFactoryMutation mutationFactory = mock(IFactoryMutation.class);
+        MapperMutation mapperMutation = new MapperMutation(mutationFactory);
         MutationDataModel mutationDataModel1 = mock(MutationDataModel.class);
         MutationDataModel mutationDataModel2 = mock(MutationDataModel.class);
 
@@ -48,6 +68,17 @@ class MapperMutationTest {
         when(mutationDataModel1.getDescription()).thenReturn("description1");
         when(mutationDataModel2.getMutationId()).thenReturn("mutationId2");
         when(mutationDataModel2.getDescription()).thenReturn("description2");
+
+        Mutation mutation1 = mock(Mutation.class);
+        Mutation mutation2 = mock(Mutation.class);
+
+        when(mutation1.identity()).thenReturn(new MutationId("mutationId1"));
+        when(mutation1.getDescription()).thenReturn(new Description("description1"));
+        when(mutation2.identity()).thenReturn(new MutationId("mutationId2"));
+        when(mutation2.getDescription()).thenReturn(new Description("description2"));
+
+        when(mutationFactory.createMutation(new MutationId("mutationId1"), new Description("description1"))).thenReturn(mutation1);
+        when(mutationFactory.createMutation(new MutationId("mutationId2"), new Description("description2"))).thenReturn(mutation2);
 
         List<MutationDataModel> listDataModel = List.of(mutationDataModel1, mutationDataModel2);
 
@@ -67,7 +98,8 @@ class MapperMutationTest {
     @Test
     void shouldReturnEmptyListWhenInputListIsEmpty() {
         // arrange
-        MapperMutation mapperMutation = new MapperMutation();
+        IFactoryMutation mutationFactory = mock(IFactoryMutation.class);
+        MapperMutation mapperMutation = new MapperMutation(mutationFactory);
         List<MutationDataModel> emptyList = new ArrayList<>();
 
         // act
@@ -83,7 +115,8 @@ class MapperMutationTest {
     @Test
     void shouldThrowExceptionWhenInputListIsNull() {
         // arrange
-        MapperMutation mapperMutation = new MapperMutation();
+        IFactoryMutation mutationFactory = mock(IFactoryMutation.class);
+        MapperMutation mapperMutation = new MapperMutation(mutationFactory);
         List<MutationDataModel> nullList = null;
 
         // act & assert
@@ -93,7 +126,8 @@ class MapperMutationTest {
     @Test
     void nullDataModelThrowsException() {
         //arrange
-        MapperMutation mapperMutation = new MapperMutation();
+        IFactoryMutation mutationFactory = mock(IFactoryMutation.class);
+        MapperMutation mapperMutation = new MapperMutation(mutationFactory);
         MutationDataModel mutationDataModel = null;
         //act + assert
         assertThrows(NullPointerException.class,() -> mapperMutation.dataModelToDomain(mutationDataModel));
